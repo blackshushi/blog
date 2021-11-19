@@ -1,0 +1,9 @@
+.items-body-content
+  = comment.commenter
+  = ":"
+  = comment.body
+  = link_to [comment.article, comment], method: :delete, data: {confirm: "Are you sure?"}, class: 'small-button' do
+    %i.fa.fa-close{style: 'float: right; margin: 10px'}
+      
+  
+

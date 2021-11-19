@@ -1,0 +1,31 @@
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+	3.0.2
+
+* System dependencies
+	- sqlite3
+	- haml
+	- jquery
+	- font-awesome-rails
+
+* Configuration
+	Execute `bundle install` in project directory
+
+* Database creation
+	Kindly execute `bin/rails db:migrate` and you are good to go!
+
+* Database initialization
+	This is a testing project and nothing about privacy, use the default database.yml will do!
+
+* Show deleted articles and comments(Tasks 3)
+	Please follow the instructions to get the deleted articles and comments in rails console.
+	1. Execute `bin/rails console` in project directory
+	2. Execute `Article.deleted`
+	3. Execute `Comment.deleted` 
+

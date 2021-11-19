@@ -1,0 +1,19 @@
+= form_with model: [@article, @article.comments.build] do |f|
+  %table.form-table
+    %tr
+      %th
+        Commenter
+      %td
+        = f.text_field :commenter, class: 'text-field'
+    %tr 
+      %th
+        Comment
+      %td
+        = f.text_field :body , class: 'text-field'
+    %tr
+      %th
+        Status
+      %td
+        = f.select :status, Visible::VALID_STATUSES - ['deleted'], readonly: true, class: 'select-field'
+
+  = f.submit "Comment", class: 'form-table-button'

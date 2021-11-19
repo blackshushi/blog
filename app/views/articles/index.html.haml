@@ -1,0 +1,20 @@
+= content_for :title, 'Home Page'
+
+.items
+  .items-head
+    %p
+      Articles
+    %pp
+      = "Our blog has #{Article.public_count} articles and counting!"
+    %hr
+      
+  .items-body
+    = link_to new_article_path, class: 'button' do
+      %i.fa.fa-plus{style: 'margin-left: 50%'}
+    -@articles.each do |article|
+      .items-body-content
+        = link_to article_path(article.id) do 
+          %span
+            %i.fa.fa-angle-right
+              = article.title
+                    

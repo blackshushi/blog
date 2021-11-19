@@ -1,0 +1,30 @@
+= form_with model: article do |f|
+  %table.form-table
+    %tr
+      %th
+        Author
+      %td
+        = f.text_field :author, disabled: action_name != 'new', class: 'text-field'
+        - article.errors.full_messages_for(:author).each do |message|
+          = message
+    %tr 
+      %th
+        Title
+      %td
+        = f.text_field :title , class: 'text-field'
+        - article.errors.full_messages_for(:title).each do |message|
+          = message
+    %tr
+      %th
+        Body
+      %td
+        = f.text_field :body, class: 'text-field'
+        - article.errors.full_messages_for(:body).each do |message|
+          = message
+    %tr
+      %th
+        Status
+      %td
+        = f.select :status, Visible::VALID_STATUSES - ['deleted'], class: 'select-field'
+
+  = f.submit "Submit", class: 'form-table-button'

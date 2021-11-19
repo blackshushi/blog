@@ -1,0 +1,9 @@
+= content_for :title, "New Article"
+
+.items
+  .items-head
+    %p
+      New Article
+
+  = render 'form', article: @article, url: articles_path
+

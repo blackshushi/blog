@@ -1,0 +1,9 @@
+= content_for :title, "Edit - #{@article.title}"
+
+.items
+  .items-head
+    %p
+      Edit Article
+
+  = render "form", article: @article
+
