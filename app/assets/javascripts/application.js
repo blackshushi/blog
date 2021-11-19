@@ -11,6 +11,5 @@
 // about supported directives.
 //
 //= require jquery3
-//= require jquery.flexslider-min
 //= require jquery_ujs
 //= require article.js
