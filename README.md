@@ -10,13 +10,15 @@ Things you may want to cover:
 
 * System dependencies
 	- sqlite3
+	- yarn
 	- haml
 	- jquery
 	- font-awesome-rails
 
 * Configuration
 
-	Execute `bundle install` in project directory
+	1. Execute `bundle install` in project directory
+	2. Execute `yarn install` to make sure packages is install to project
 
 * Database creation
 
