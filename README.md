@@ -9,7 +9,7 @@ Things you may want to cover:
 	3.0.2
 
 * System dependencies
-	- sqlite3
+	- postgresql
 	- yarn
 	- haml
 	- jquery

@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2021_11_19_004044) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "article_histories", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.string "body"
-    t.integer "article_id"
+    t.bigint "article_id"
     t.integer "version"
     t.index ["article_id"], name: "index_article_histories_on_article_id"
   end
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_11_19_004044) do
   create_table "comments", force: :cascade do |t|
     t.string "commenter"
     t.text "body"
-    t.integer "article_id", null: false
+    t.bigint "article_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "status"
