@@ -3,7 +3,7 @@
 .items
   .items-head
     .article
-      = link_to article_path(@article), method: :delete, data: {confirm: "Are you sure?"}, class: 'small-button' do
+      = button_to article_path(@article), method: :delete, data: {confirm: "Are you sure?"}, style: "background-color: white; border: none; float: right;" do
         %i.fa.fa-close{style: 'float:right;margin-right: 10px'}
 
       = link_to edit_article_path(@article), class: 'small-button' do 
