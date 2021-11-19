@@ -11,9 +11,6 @@ Things you may want to cover:
 * System dependencies
 	- postgresql
 	- yarn
-	- haml
-	- jquery
-	- font-awesome-rails
 
 * Configuration
 
