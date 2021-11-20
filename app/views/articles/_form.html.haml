@@ -25,6 +25,6 @@
       %th
         Status
       %td
-        = f.select :status, Visible::VALID_STATUSES - ['deleted'], class: 'select-field'
+        = f.select :status, Visible::VALID_STATUSES - ['deleted']
 
   = f.submit "Submit", class: 'form-table-button'
