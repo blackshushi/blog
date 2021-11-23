@@ -1,0 +1,9 @@
+= content_for :title, "New Order"
+
+.items
+  .items-head
+    %p
+      New Order
+
+  = render 'form', order: @order, url: orders_path
+

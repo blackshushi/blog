@@ -1,0 +1,19 @@
+= form_with model: order do |f|
+  %table.form-table
+    %tr
+      %th
+        How many items do you wish to add?
+      %td
+        = f.number_field :item_counts
+    %tr 
+      %th
+        Customer Name
+      %td
+        = f.text_field :customer_name , default: 'Tester'
+    %tr
+      %th
+        Customer Address
+      %td
+        = f.text_field :customer_address, default: "Tester's address"
+
+  = f.submit "Submit", class: 'form-table-button'

@@ -7,8 +7,9 @@ class Order < ApplicationRecord
 
 	before_create :assign_reference_number
 
-	def self.randomly_create_order(item_counts, cname, caddress)
-		order = Order.new(customer_name: cname, customer_address: caddress)
+	def self.randomly_create_order(opts={})
+    item_counts = opts[:item_counts].to_i
+		order = Order.new(customer_name: opts[:customer_name], customer_address: opts[:customer_address])
 
 		ic = Item.count
 		if ic < item_counts
@@ -29,7 +30,7 @@ class Order < ApplicationRecord
 
 		order.order_items_attributes = order_items_attributes
 
-		order.save
+    order
 	end
 
 	def total_price
@@ -38,31 +39,48 @@ class Order < ApplicationRecord
 		end.sum
 	end
 
+  def self.generate_multiple_receipt(reference_numbers)
+    fpdf = Prawn::Document.generate("receipt.pdf") do |pdf|
+      reference_numbers.each do |reference_number|  
+        receipt = Order.find(reference_number).receipt
+
+        pdf.start_new_page(template: receipt)
+      end
+    end
+
+		fpdf
+  end
+
 	def receipt
-		full_pdf = CombinePDF.new
+    line_items = [
+      ["Date",           self.created_at.to_s],
+      ["Account Billed", self.customer_name],
+      ["==========================================", "=========================================="],
+      ["Product", "Amount"],
+      ["---------------------------------------------------", "---------------------------------------------------"]
+    ]
 
-		self.order_items do |oi|
-			receipt = Receipts::Receipt.new(
-	      id: oi.id,
-	      subheading: "RECEIPT FOR #{oi.name}",
-	      product: oi.name,
-	      company: {
-	        email: "blackshushi4571+09@gmail.com",
-	      },
-	      line_items: [
-	        ["Date",           oi.created_at.to_s],
-	        ["Account Billed", "#{self.customer_name}"],
-	        ["Product",        oi.name],
-	        ["Amount",         oi.quantity * oi.unit_price],
-	        ["Address",        self.customer_address]
-	      ]
-	    )
+    self.order_items.each do |oi|
+      line_items.push([oi.name, oi.quantity * oi.unit_price])
+    end
 
-			pp receipt
-	    full_pdf.push(receipt)
-		end
+    line_items.push(["==========================================", "=========================================="])
+    line_items.push(["Total Amount",        self.total_price])
+    line_items.push(["Address",        self.customer_address])
+            
+    receipt = Receipts::Receipt.new(
+      id: self.reference_number,
+      subheading: "RECEIPT FOR #{self.reference_number}",
+      product: "Order",
+      company: {
+        name: 'company',
+        address: 'Malaysia',
+        email: "blackshushi4571+09@gmail.com",
+      },
+      line_items: line_items
+    )
 
-		full_pdf
+    receipt
 	end
 
 	private

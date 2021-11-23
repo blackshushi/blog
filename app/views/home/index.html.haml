@@ -1,0 +1,19 @@
+= content_for :title, 'Home'
+
+.items
+  .items-head
+    %p
+      Home
+    %hr
+      
+  .items-body
+    .items-body-content
+      = link_to articles_path do 
+        %span
+        %i.fa.fa-angle-right
+          Article
+    .items-body-content  
+      = link_to orders_path do 
+        %span
+        %i.fa.fa-angle-right
+          Order

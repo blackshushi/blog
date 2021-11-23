@@ -1,0 +1,27 @@
+= content_for :title, 'Orders'
+
+.items
+  .items-head
+    %p
+      Orders
+
+      = form_tag controller: "orders", action: "multiple_receipt", method: "post" do 
+        %table.form-table
+          %tr
+            %th
+              Orders numbers
+            %td
+              = text_area_tag :order_references_numbers
+        = submit_tag "Submit", class: 'form-table-button-small'
+
+    %hr
+      
+  .items-body
+    = link_to new_order_path, class: 'button' do
+      %i.fa.fa-plus{style: 'margin-left: 50%'}
+    -@orders.each do |order|
+      .items-body-content
+        = link_to order_path(order.id) do 
+          %span
+            %i.fa.fa-angle-right
+              = order.reference_number

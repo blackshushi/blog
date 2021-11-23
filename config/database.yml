@@ -6,7 +6,11 @@
 #
 development:
   adapter:  postgresql
+  username: postgres
+  host: localhost
+  password: secret
   database: my_database_development
+  encoding: unicode
   pool: 5
   timeout: 5000
 

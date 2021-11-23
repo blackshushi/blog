@@ -1,0 +1,43 @@
+= content_for :title, "#{@order.reference_number}"
+
+.items
+  .items-head
+    = button_to order_path(format: :pdf), method: :get, style: "background-color: white; border: none; float: right;", format: {"data-type" => "pdf" } do
+      %i.fa.fa-list-alt{style: 'float:right;margin-right: 10px'}
+
+    %p
+      = @order.reference_number
+    %hr
+
+  .items-body
+    .items-body-content
+      %table
+        %thead
+          %tr
+            %th{width: '5%'}
+              SKU
+            %th{width: '10%'}
+              Name
+            %th{width: '50%'}
+              Quantity
+            %th{width: '35%'}
+              Unit Price
+        %tbody
+          - @order.order_items.each do |order_item|
+          
+            %tr
+              %th{width: '10%'}
+                = order_item.sku
+              %th{width: '40%'}
+                = order_item.name
+              %th{width: '20%'}
+                = order_item.quantity
+              %th{width: '30%'}
+                = order_item.unit_price
+
+:javascript
+  function ready() {
+    window.print();
+  }
+
+  document.addEventListener("DOMContentLoaded", ready)

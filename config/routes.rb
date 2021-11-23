@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
-  root "articles#index"
+  root "home#index"
 
   resources :articles do 
     resources :comments
     resources :article_histories
+  end
+
+  resources :orders do
+    collection do 
+      post :multiple_receipt
+    end
   end
 end 
