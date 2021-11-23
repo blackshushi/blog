@@ -1,7 +1,8 @@
-- if action_name != 'index'
-  %headers
-    = link_to '/', class: 'button' do 
-      %i.fa.fa-home
+-if current_page?(:controller => 'articles')
+  - if action_name != 'index'
+    %headers
+      = link_to '/', class: 'button' do 
+        %i.fa.fa-home
   	
-    = link_to :back, class: 'button' do 
-      %i.fa.fa-arrow-left
+      = link_to :back, class: 'button' do 
+        %i.fa.fa-arrow-left
