@@ -1,6 +1,4 @@
 class OrdersController < ApplicationController
-  before_action :validate_params, only: [:create]
-
   def index
     @orders = Order.order('created_at desc')
   end
@@ -28,14 +26,14 @@ class OrdersController < ApplicationController
   def create
     if order_params["item_counts"].to_i == 0 
       flash[:alert] = "item counts need to be greater than 0"
-      render :new
+      redirect_to new_order_path
     else
       @order = Order.randomly_create_order(order_params)
       
       if @order.save
         redirect_to @order
       else
-        render :new
+        redirect_to new_order_path
       end
     end
   end
@@ -49,20 +47,6 @@ class OrdersController < ApplicationController
   
   private
   def order_params
-    params.permit(:customer_namem, :customer_address, :item_counts)
-  end
-
-  def validate_params
-    key_missing = []
-
-    (order_params.keys - ["customer_name", "customer_address", "item_counts"]).each do |k|
-      key_missing.push(k)
-    end
-
-    if key_missing.length > 0
-      render json: {
-        message: "Missing parameters: #{key_missing}"
-      }, status: 400
-    end
+    params.require(:order).permit(:customer_namem, :customer_address, :item_counts)
   end
 end
