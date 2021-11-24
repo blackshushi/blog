@@ -48,16 +48,16 @@ ActiveRecord::Schema.define(version: 2021_11_23_153558) do
     t.integer "sku"
     t.string "name"
     t.integer "price"
-    t.datetime "created_at", default: "2021-11-23 15:44:28", null: false
-    t.datetime "updated_at", default: "2021-11-23 15:44:28", null: false
+    t.datetime "created_at", default: "2021-11-23 23:56:17", null: false
+    t.datetime "updated_at", default: "2021-11-23 23:56:17", null: false
   end
 
   create_table "order_items", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "item_id"
     t.integer "quantity"
-    t.datetime "created_at", default: "2021-11-23 15:44:28", null: false
-    t.datetime "updated_at", default: "2021-11-23 15:44:28", null: false
+    t.datetime "created_at", default: "2021-11-23 23:56:17", null: false
+    t.datetime "updated_at", default: "2021-11-23 23:56:17", null: false
     t.index ["item_id"], name: "index_order_items_on_item_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 2021_11_23_153558) do
     t.string "reference_number", limit: 9
     t.string "customer_name"
     t.string "customer_address"
-    t.datetime "created_at", default: "2021-11-23 15:44:28", null: false
-    t.datetime "updated_at", default: "2021-11-23 15:44:28", null: false
+    t.datetime "created_at", default: "2021-11-23 23:56:17", null: false
+    t.datetime "updated_at", default: "2021-11-23 23:56:17", null: false
   end
 
   add_foreign_key "comments", "articles"

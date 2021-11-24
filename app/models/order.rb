@@ -39,16 +39,19 @@ class Order < ApplicationRecord
 		end.sum
 	end
 
-  def self.generate_multiple_receipt(reference_numbers)
-    fpdf = Prawn::Document.generate("receipt.pdf") do |pdf|
-      reference_numbers.each do |reference_number|  
-        receipt = Order.find(reference_number).receipt
+  def self.generate_multiple_receipts(reference_numbers, file_name)
+  	pdf = CombinePDF.new
+    
+  	reference_numbers.uniq.each do |reference_number| 
+    	o = Order.where(reference_number: reference_number.delete("\r")).first
+    	if o.nil?
+    		next
+    	end
 
-        pdf.start_new_page(template: receipt)
-      end
+      pdf << CombinePDF.parse(o.receipt.render)
     end
 
-		fpdf
+		pdf.save file_name
   end
 
 	def receipt
@@ -73,7 +76,7 @@ class Order < ApplicationRecord
       subheading: "RECEIPT FOR #{self.reference_number}",
       product: "Order",
       company: {
-        name: 'company',
+        name: 'Company name',
         address: 'Malaysia',
         email: "blackshushi4571+09@gmail.com",
       },

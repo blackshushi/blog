@@ -5,13 +5,13 @@
     %p
       Orders
 
-      = form_tag controller: "orders", action: "multiple_receipt", method: "post" do 
+      = form_tag controller: "orders", action: "multiple_receipts" do 
         %table.form-table
           %tr
             %th
               Orders numbers
             %td
-              = text_area_tag :order_references_numbers
+              = text_area_tag :order_references_numbers, nil, placeholder: "Enter orders references number (split by line) to generate receipts!",size: "30 x 10"
         = submit_tag "Submit", class: 'form-table-button-small'
 
     %hr

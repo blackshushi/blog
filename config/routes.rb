@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :orders do
     collection do 
-      post :multiple_receipt
+      post :multiple_receipts
     end
   end
 end 

@@ -9,11 +9,11 @@
       %th
         Customer Name
       %td
-        = f.text_field :customer_name , default: 'Tester'
+        = f.text_field :customer_name , value: 'Tester'
     %tr
       %th
         Customer Address
       %td
-        = f.text_field :customer_address, default: "Tester's address"
+        = f.text_field :customer_address, value: "Tester's address"
 
-  = f.submit "Submit", class: 'form-table-button'
+  = f.submit "Submit", class: 'form-table-button', data: {turbolinks: false}

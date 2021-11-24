@@ -4,6 +4,7 @@
   .items-head
     %p
       New Order
-
+    %pp
+      = flash[:alert]
   = render 'form', order: @order, url: orders_path
 
